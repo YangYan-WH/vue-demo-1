@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class='wrapper'>
     <div class="row">
       <Cell v-on:click='onClickCell(0,$event)' v-bind:n="n"/>
       <Cell v-on:click='onClickCell(1,$event)' v-bind:n="n"/>
@@ -16,7 +16,7 @@
       <Cell v-on:click='onClickCell(8,$event)' v-bind:n="n"/>
     </div>
     <div>
-      {{n}} 结果 {{result}}
+      {{result?`${result}获得胜利`:'胜负未分'}}
     </div>
   </div>
 </template>
@@ -33,7 +33,7 @@ export default {
         [null,null,null],
         [null,null,null]
       ],
-      result:false
+      result:null,
     }
   },
   components: {
@@ -44,31 +44,33 @@ export default {
       console.log('app')
       console.log(text)
       console.log(i)
+      
       this.map[Math.floor(i / 3)][i%3] = text
       this.n = this.n + 1
-      this.tell()
+
+      this.tell(text)
     },
-    tell(){
+    tell(text){
       let map = this.map
       let result = this.result
       console.log(map)
       for(let i = 0;i<2;i++){
         if(map[i][0] && map[i][0] === map[i][1] && map[i][1] === map[i][2]){
-          this.result = true
+          this.result = text
         }
       }
 
       for(let j = 0;j<2;j++){
         if(map[0][j] && map[0][j] === map[1][j] && map[1][j] === map[2][j]){
-          this.result = true
+          this.result = text
         }
       }
 
       if(map[0][0] && map[0][0]===map[1][1] && map[1][1] === map[2][2]){
-        this.result = true
+        this.result = text
       }
       if(map[2][0] && map[2][0]=== map[1][1] && map[1][1] === map[0][2]){
-        this.result = true
+        this.result = text
       }
 
     }
@@ -77,7 +79,12 @@ export default {
 </script>
 
 <style>
+  .wrapper{
+    text-align: center;
+  }
   .row{
     display: flex;
+    justify-content: center;
+    align-items: center;
   }
 </style>

@@ -27,14 +27,10 @@ export default {
           }
           this.a = true
           this.text = this.n%2 ===0 ? this.b: this.c
-          // console.log('self')
-          // console.log(this.text)
           this.$emit('click',this.text)
 
       }
   }
-
-
 }
 </script>
 
@@ -45,7 +41,7 @@ export default {
     height: 100px;
     line-height: 100px;
     font-size: 50px;
-    border: 1px solid red;
+    border: 1px solid black;
     text-align: center;
   }
 </style>

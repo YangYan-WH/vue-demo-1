@@ -15,8 +15,8 @@
       <Cell v-on:click='onClickCell(7,$event)' v-bind:n="n"/>
       <Cell v-on:click='onClickCell(8,$event)' v-bind:n="n"/>
     </div>
-    <div>
-      {{result?`${result}获得胜利`:'胜负未分'}}
+    <div class="result" v-bind:class="{success: !!result}" >
+      {{result?`${result} 获得胜利`:'胜负未分'}}
     </div>
   </div>
 </template>
@@ -47,7 +47,6 @@ export default {
       
       this.map[Math.floor(i / 3)][i%3] = text
       this.n = this.n + 1
-
       this.tell(text)
     },
     tell(text){
@@ -79,12 +78,28 @@ export default {
 </script>
 
 <style>
+body{
+  height: 100vh;
+  background-color: #2a80eb;
+}
   .wrapper{
     text-align: center;
+    margin:  100px 0;
   }
   .row{
     display: flex;
     justify-content: center;
     align-items: center;
+    
+  }
+  .row > div{
+    background-color: white;
+  }
+  .result{
+    font-size: 32px;
+    color:#f7f9fa;
+  }
+  .success{
+    color: #1cad70;
   }
 </style>
